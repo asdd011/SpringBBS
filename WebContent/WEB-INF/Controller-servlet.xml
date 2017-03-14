@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"    
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+         
+        <context:annotation-config/>
+        
+	 <bean name="/list.ajk" 
+	 	class="spring.controller.List_Controller"/> 
+  	 <bean id="write" 
+	 	class="spring.controller.WriteController">
+	 	<property name="uploadPath" value="/upload"/>	
+	 </bean> 
+  	
+  	 <bean id="view" 
+	 	class="spring.controller.ViewControl"/>
+	 <bean id="answer" 
+	 	class="spring.controller.AnswerControl"/>
+	 <bean id="update" 
+	 	class="spring.controller.UpdateBbs_Controller"/>
+  	
+  	
+  	
+  	  	<!-- View Resolver를 설정하자.
+  		뷰의 저장소(prefix), 뷰의 확장자(suffix) 지정
+  		확장자가 지정되면
+  		ModelAndView같은 곳에서 ex1/hello.jsp라고 하지 않고
+  		확장자를 뺀 경로를 지정해야한다.(ex1/hello)
+  	 -->
+  	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+  		<property name="suffix" value=".jsp"/>
+  		<property name="prefix" value="/jsp/"/>
+  	
+  	</bean>
+  	
+  	  	
+  		<!-- 스프링 환경에서 파일업로드 시 반드시 아래의 multipartResolver를 선언해야해
+		아이디 또한 multipartResolver로 지정해야하고, 
+		라이브러리는 apache.commons의 fileupload와 io가 필요하다-->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8"/>
+		<property name="maxUploadSize" value="-1"/>
+	
+	</bean>
+	
+  	
+  	
+</beans>
